@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio | Accueil</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    
+<div class="os-background" id="ambient-bg">
+        <div class="metallic-reflection"></div>
+        <div class="glass-overlay"></div>
+    </div>
+
+    
+
+    <div class="desktop-icons">
+        <div class="desktop-item">
+            <div class="file-icon pdf"></div>
+            <span>CV_Aymane.pdf</span>
+        </div>
+        <div class="desktop-item">
+            <div class="file-icon folder"></div>
+            <span>Examens_IUT</span>
+        </div>
+    </div>
+
+    <header class="system-header">
+<div class="sys-left">
+            <svg class="logo-a" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 2L2 22h4.5L12 9l5.5 13H22L12 2z" fill="#000000"/>
+                <polygon points="12,15 9,21 15,21" fill="#00000"/>
+            </svg>
+            <span class="app-name">Portfolio de Aymane</span>
+        </div>
+        <nav class="sys-nav">
+            <a href="index.html" class="nav-item active">Accueil</a>
+            <a href="projets.html" class="nav-item disabled">Projets</a>
+            <a href="contact.html" class="nav-item disabled">Contact</a>
+        </nav>
+        <div class="sys-right">
+            <span id="clock">00:00</span>
+        </div>
+    </header>
+
+    <main class="desktop-stage">
+        <div class="window-container" id="draggableWindow">
+            <div class="window-border-outer">
+                <div class="window-inner glass">
+                    <div class="title-bar" id="windowHeader">
+                        <div class="traffic-lights">
+                            <span class="light red"></span>
+                            <span class="light yellow"></span>
+                            <span class="light green" style="pointer-events: none; opacity: 0.5; cursor: not-allowed;"></span>
+                        </div>
+                        <div class="window-title">Présentation.app</div>
+                    </div>
+
+                    <div class="app-viewport">
+                        <aside class="sidebar">
+                            <div class="sidebar-section">Favoris</div>
+                            <ul class="sidebar-nav">
+                                <li class="nav-tab active" data-target="content-identite">Identité</li>
+                                <li class="nav-tab" data-target="content-cursus">Cursus</li>
+                                <li class="nav-tab" data-target="content-competences">Compétences</li>
+                                <li class="nav-tab" data-target="content-objectifs">Objectifs</li>
+                            </ul>
+                        </aside>
+
+                        <section class="main-content">
+                            <div id="content-identite" class="tab-content active">
+                                <div class="hero">
+                                    <img src="imageportfolio.png" alt="Portrait de Aymane" class="avatar-glow">
+                                    <div class="text-group">
+                                        <h1 class="platinum-text">Aymane</h1>
+                                        <p class="tagline">Étudiant en Informatique — BUT1</p>
+                                    </div>
+                                </div>
+
+                                <div class="details-grid">
+                                    <div class="card-item">
+                                        <label>Nom Complet</label>
+                                        <p>Aymane ANGA</p>
+                                    </div>
+                                    <div class="card-item">
+                                        <label>Université</label>
+                                        <p>IUT2 de Grenoble</p>
+                                    </div>
+                                    <div class="card-item">
+                                        <label>Vocation</label>
+                                        <p>Réalisation d'Applications : conception développement, validation</p>
+                                    </div>
+                                    <div class="card-item">
+                                        <label>Diplômes</label>
+                                        <p>Baccalauréat Mention TB, Diplôme National du Brevet Mention TB</p>
+                
+                                    </div>
+                                </div>
+
+                                <div class="bio-box">
+                                    <p>Actuellement en première année de BUT Informatique, je construis mon parcours autour de la rigueur technique et de l'élégance visuelle. Mon objectif est de fusionner performance et interfaces intuitives.</p>
+                                </div>
+                            </div>
+
+                            <div id="content-cursus" class="tab-content">
+                                <h2 class="section-title">Parcours Académique</h2>
+                                <div class="timeline-container">
+                                    <div class="timeline-line"></div>
+                                    
+                                    <div class="timeline-item">
+                                        <div class="timeline-dot-outer">
+                                            <div class="timeline-dot"></div>
+                                        </div>
+                                        <div class="timeline-card">
+                                            <span class="timeline-date">2025 — Présent</span>
+                                            <h3>BUT Informatique</h3>
+                                            <h4>IUT2 de Grenoble — Université Grenoble Alpes</h4>
+                                            <p>Spécialisation axée sur la réalisation d'applications performantes. Approfondissement de l'architecture logicielle, de la programmation orientée objet avancée et de la gestion agile de données complexes.</p>
+                                            <span class="location-badge">Grenoble, France</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="timeline-item">
+                                        <div class="timeline-dot-outer">
+                                            <div class="timeline-dot"></div>
+                                        </div>
+                                        <div class="timeline-card">
+                                            <span class="timeline-date">2024 — 2025</span>
+                                            <h3>Études en Informatique / Sciences</h3>
+                                            <h4>EPFL — École Polytechnique Fédérale de Lausanne</h4>
+                                            <p>Expérience exigeante au sein d'un pôle d'ingénierie Informatique. Développement d'une forte rigueur mathématique, d'une capacité d'abstraction logique poussée et d'une autonomie solide face aux défis informatiques complexes.</p>
+                                            <span class="location-badge">Lausanne, Suisse</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="timeline-item">
+                                        <div class="timeline-dot-outer">
+                                            <div class="timeline-dot"></div>
+                                        </div>
+                                        <div class="timeline-card">
+                                            <span class="timeline-date">2017 — 2024</span>
+                                            <h3>Collège & Lycée Français</h3>
+                                            <h4>Enseignement AEFE</h4>
+                                            <p>Parcours d'excellence scientifique conclu par l'obtention du <strong>Baccalauréat Mention Très Bien</strong>. Émergence d'un intérêt profond pour l'algorithmique et la résolution de problèmes structurés.</p>
+                                            <span class="location-badge">Casablanca, Maroc</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id="content-competences" class="tab-content">
+    <h2 class="section-title">Expertises</h2>
+    
+    <div class="skills-bento-grid">
+        <div class="bento-card tech-card">
+            <div class="bento-header">
+                <div class="bento-title-group">
+                    <h3>Architecture et Développement</h3>
+                    <span class="bento-subtitle">Écosystèmes applicatifs et langages maîtrisés</span>
+                </div>
+            </div>
+            <div class="skills-pills-container">
+                <div class="skill-pill">Java</div>
+                <div class="skill-pill">JavaScript</div>
+                <div class="skill-pill">SQL</div>
+                <div class="skill-pill">R</div>
+                <div class="skill-pill">Python</div>
+                <div class="skill-pill">HTML5</div>
+                <div class="skill-pill">CSS3</div>
+            </div>
+        </div>
+
+        <div class="bento-card languages-card">
+            <div class="bento-header">
+                <div class="bento-title-group">
+                    <h3>Langues</h3>
+                    <span class="bento-subtitle">Profil et aptitudes linguistiques</span>
+                </div>
+            </div>
+            <div class="languages-modern-list">
+                <div class="lang-premium-item">
+                    <span class="lang-name">Français</span>
+                    <span class="lang-premium-badge native">Langue maternelle</span>
+                </div>
+                <div class="lang-premium-item">
+                    <span class="lang-name">Anglais</span>
+                    <span class="lang-premium-badge fluent">Courant (Professionnel)</span>
+                </div>
+                <div class="lang-premium-item">
+                    <span class="lang-name">Espagnol</span>
+                    <span class="lang-premium-badge academic">Courant (Académique)</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="bento-card sciences-card">
+            <div class="bento-header">
+                <div class="bento-title-group">
+                    <h3>Sciences & Fondations</h3>
+                    <span class="bento-subtitle">Rigueur analytique et logique</span>
+                </div>
+            </div>
+            <div class="sciences-modern-stack">
+                <div class="science-premium-row">
+                    <div class="science-glyph">ƒ(x)</div>
+                    <div class="science-text-details">
+                        <h4>Mathématiques</h4>
+                        <p>Algèbre linéaire, Analyse, Algorithmique discrète</p>
+                    </div>
+                </div>
+                <div class="science-premium-row">
+                    <div class="science-glyph">⚛</div>
+                    <div class="science-text-details">
+                        <h4>Physique & Matériaux</h4>
+                        <p>Mécanique générale, Électronique, Logique des systèmes</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+                            
+                            <div id="content-objectifs" class="tab-content">
+                                <h2 class="section-title">Ambitions et Ligne de Mire</h2>
+                                
+                                <div class="target-dashboard">
+                                    <div class="target-container-left">
+                                        <div class="radar-lens">
+                                            <div class="radar-ring ring-outer" data-aim="step-but1">
+                                                <span class="ring-label">2026</span>
+                                            </div>
+                                            <div class="radar-ring ring-middle" data-aim="step-but2">
+                                                <span class="ring-label">2027</span>
+                                            </div>
+                                            <div class="radar-ring ring-bullseye" data-aim="step-but3">
+                                                <div class="core-dot"></div>
+                                                <span class="ring-label">2028</span>
+                                            </div>
+                                            <div class="radar-axis axis-x"></div>
+                                            <div class="radar-axis axis-y"></div>
+                                        </div>
+                                    </div>
+
+                                    <div class="target-panel-right">
+                                        
+                                        <div class="tactical-card focus-blue active-focus" id="step-but1">
+                                            <div class="card-header-target">
+                                                <span class="step-meta">Impact Immédiat — Mai-Juin 2026</span>
+                                                <h3>Clôture du BUT1</h3>
+                                                <span class="status-pill status-done">Quasi accompli</span>
+                                            </div>
+                                            <p class="step-pitch">Valider cette première année universitaire au sein du département Informatique avec un dossier académique d'excellence.</p>
+                                            <ul class="step-metrics">
+                                                <li class="checked">Assimilation des fondamentaux (Algorithmique, SQL, Java, Web)</li>
+                                                <li class="checked">Consolidation des moyennes sur les derniers livrables du S2</li>
+                                            </ul>
+                                        </div>
+
+                                        <div class="tactical-card focus-purple" id="step-but2">
+                                            <div class="card-header-target">
+                                                <span class="step-meta">Étape Suivante — Rentrée 2026</span>
+                                                <h3>BUT2 : Spécialisation Parcours A</h3>
+                                                <span class="status-pill status-next">Prochain Focus</span>
+                                            </div>
+                                            <p class="step-pitch">Plongée au cœur de l'ingénierie applicative et concrétisation professionnelle via le choix de spécialisation obligatoire.</p>
+                                            <ul class="step-metrics">
+                                                <li class="aim"><strong>Parcours A sélectionné :</strong> Réalisation d'Applications : conception, développement, validation</li>
+                                                <li class="aim">Exceller dans la conception de patrons logiciels (Design Patterns)</li>
+                                                <li class="aim">Décrocher un stage technique à fort impact applicatif</li>
+                                            </ul>
+                                        </div>
+
+                                        <div class="tactical-card focus-orange" id="step-but3">
+                                            <div class="card-header-target">
+                                                <span class="step-meta">Plein Cœur de Cible — Vision d'Avenir</span>
+                                                <h3>Orientation Stratégique</h3>
+                                                <span class="status-pill status-vision">Horizon</span>
+                                            </div>
+                                            <p class="step-pitch">Maximiser le niveau de sortie d'études pour intégrer la sphère de l'ingénierie informatique via deux trajectoires d'excellence :</p>
+                                            <div class="split-pathways">
+                                                <div class="path-option">
+                                                    <h4>Voie BUT 3</h4>
+                                                    <p>Poursuite du diplôme adossée à une alternance en entreprise.</p>
+                                                </div>
+                                                <div class="path-divider">ou</div>
+                                                <div class="path-option elite">
+                                                    <h4>Voie Grande École</h4>
+                                                    <p>Passerelle sur dossier ou concours pour intégrer un cycle d'Ingénieur.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="window-container" id="settingsWindow" style="display: none; top: 140px; left: 240px; width: 580px;">
+            <div class="window-border-outer">
+                <div class="window-inner glass">
+                    <div class="title-bar" id="settingsWindowHeader">
+                        <div class="traffic-lights">
+                            <span class="light red"></span>
+                            <span class="light yellow"></span>
+                            <span class="light green" style="pointer-events: none; opacity: 0.5; cursor: not-allowed;"></span>
+                        </div>
+                        <div class="window-title">Paramètres.app</div>
+                    </div>
+
+                    <div class="app-viewport">
+                        <section class="main-content settings-full-view">
+                            <div id="settings-appearance" class="tab-content active" style="opacity: 1;">
+                                <h2 class="section-title">Arrière-plan de l'OS</h2>
+                                <p class="section-subtitle">Personnalisez la nuance chromatique de votre environnement de bureau en temps réel :</p>
+                                
+                                <div class="color-picker-deck">
+    <div class="color-option-item" data-theme="default">
+        <div class="color-preview active"></div>
+        <span class="color-label label-active">Gris Titane</span>
+    </div>
+    <div class="color-option-item" data-theme="red">
+        <div class="color-preview"></div>
+        <span class="color-label">Rouge Aurore</span>
+    </div>
+    <div class="color-option-item" data-theme="orange">
+        <div class="color-preview"></div>
+        <span class="color-label">Orange Ambre</span>
+    </div>
+    <div class="color-option-item" data-theme="green">
+        <div class="color-preview"></div>
+        <span class="color-label">Vert Jade</span>
+    </div>
+    <div class="color-option-item" data-theme="blue">
+        <div class="color-preview"></div>
+        <span class="color-label">Bleu Givre</span>
+    </div>
+    <div class="setting-toggle-row" style="margin-top: 15px; display: flex; justify-content: space-between; align-items: center; background: rgba(0, 0, 0, 0.02); border: 1px solid rgba(0, 0, 0, 0.03); padding: 16px 20px; border-radius: 14px;">
+    <div>
+        <span style="font-size: 13px; font-weight: 600; color: var(--text-main); display: block;">Fond à texture liquide (en bêta)</span>
+        <span style="font-size: 11px; color: var(--text-muted);">Activer les reflets lumineux et les ondulations fluides</span>
+    </div>
+    <label class="switch">
+        <input type="checkbox" id="toggle-liquid">
+        <span class="slider round"></span>
+    </label>
+</div>
+</div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+<footer class="dock-wrapper">
+    <div class="dock-blur">
+        <div class="dock-container">
+            <div class="dock-app" data-title="Paramètres">
+                <img src="Settings.png" alt="Paramètres" class="dock-icon-img">
+            </div>
+            <div class="dock-app" data-title="Code">
+                <img src="VSCode.png" alt="Code" class="dock-icon-img">
+            </div>
+            <div class="dock-app" data-title="Navigateur">
+                <img src="Safari.png" alt="Navigateur" class="dock-icon-img">
+            </div>
+        </div>
+    </div>
+</footer>
+
+    <script src="script.js"></script>
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+    <defs>
+        <filter id="liquid-wave" x="-30%" y="-30%" width="160%" height="160%">
+            <feTurbulence type="fractalNoise" baseFrequency="0.008" numOctaves="2" result="noise" />
+            <feDisplacementMap in="SourceGraphic" in2="noise" scale="0" xChannelSelector="R" yChannelSelector="G" id="wave-displacement" />
+        </filter>
+    </defs>
+</svg>
+</body>
+</html>

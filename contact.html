@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio | Contact</title>
+    <link rel="stylesheet" href="stylecontact.css">
+</head>
+<body>
+    
+<div class="os-background" id="ambient-bg">
+        <div class="metallic-reflection"></div>
+        <div class="glass-overlay"></div>
+    </div>
+
+
+
+    <header class="system-header">
+<div class="sys-left">
+            <svg class="logo-a" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 2L2 22h4.5L12 9l5.5 13H22L12 2z" fill="#000000"/>
+                <polygon points="12,15 9,21 15,21" fill="#00000"/>
+            </svg>
+            <span class="app-name">Portfolio de Aymane</span>
+        </div>
+        <nav class="sys-nav">
+            <a href="index.html" class="nav-item disabled">Accueil</a>
+            <a href="projets.html" class="nav-item disabled">Projets</a>
+            <a href="contact.html" class="nav-item active">Contact</a>
+        </nav>
+        <div class="sys-right">
+            <span id="clock">00:00</span>
+        </div>
+    </header>
+
+    <main class="portfolio-monolith-container">
+        
+        <div class="contact-monolith" id="contactMonolith">
+            <div class="crystal-surface-glow"></div>
+            
+            <section class="monolith-branding">
+                <div class="branding-text">
+                    <h1 class="monolith-title">Prenons<br>contact.</h1>
+                    <p class="monolith-subtitle">Une question, un projet ou une opportunité ? Laissez une trace de votre passage.</p>
+                </div>
+
+                <div class="monolith-networks">
+                    <a href="https://github.com/AngaPro" target="_blank" class="network-card-massive">
+                        <div class="network-card-shine"></div>
+                        <svg class="network-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                        </svg>
+                        <div class="network-meta">
+                            <span class="network-label">Explorer mon espace</span>
+                            <span class="network-name">GitHub</span>
+                        </div>
+                        <span class="network-arrow">↗</span>
+                    </a>
+
+                    <a href="#" target="_blank" class="network-card-massive">
+                        <div class="network-card-shine"></div>
+                        <svg class="network-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                            <rect x="2" y="9" width="4" height="12"></rect>
+                            <circle cx="4" cy="4" r="2"></circle>
+                        </svg>
+                        <div class="network-meta">
+                            <span class="network-label">Visiter mon réseau</span>
+                            <span class="network-name">LinkedIn</span>
+                        </div>
+                        <span class="network-arrow">↗</span>
+                    </a>
+                </div>
+            </section>
+
+            <section class="monolith-action">
+                <form action="#" method="POST" class="monolith-form">
+                    <div class="monolith-input-group">
+                        <input type="text" id="name" required placeholder=" " autocomplete="off">
+                        <label for="name">Nom / Entreprise</label>
+                        <div class="monolith-line"></div>
+                    </div>
+
+                    <div class="monolith-input-group">
+                        <input type="email" id="email" required placeholder=" " autocomplete="off">
+                        <label for="email">Adresse Électronique</label>
+                        <div class="monolith-line"></div>
+                    </div>
+
+                    <div class="monolith-input-group">
+                        <textarea id="message" required placeholder=" "></textarea>
+                        <label for="message">Description de votre projet...</label>
+                        <div class="monolith-line"></div>
+                    </div>
+
+                    <button type="submit" class="monolith-submit-btn">
+                        <span>Transmettre la demande</span>
+                        <div class="btn-fluid-reflection"></div>
+                    </button>
+                </form>
+            </section>
+
+        </div>
+    </main>
+
+    <script src="scriptcontact.js"></script>
+    <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+    <defs>
+        <filter id="liquid-wave" x="-30%" y="-30%" width="160%" height="160%">
+            <feTurbulence type="fractalNoise" baseFrequency="0.008" numOctaves="2" result="noise" />
+            <feDisplacementMap in="SourceGraphic" in2="noise" scale="0" xChannelSelector="R" yChannelSelector="G" id="wave-displacement" />
+        </filter>
+    </defs>
+</svg>
+
+</body>
+</html>

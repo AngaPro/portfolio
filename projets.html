@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio | Projets</title>
+    <link rel="stylesheet" href="styleprojets.css">
+</head>
+<body>
+
+<div class="os-background" id="ambient-bg">
+        <div class="metallic-reflection"></div>
+        <div class="glass-overlay"></div>
+    </div>
+
+
+
+
+    <header class="system-header">
+<div class="sys-left">
+            <svg class="logo-a" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 2L2 22h4.5L12 9l5.5 13H22L12 2z" fill="#000000"/>
+                <polygon points="12,15 9,21 15,21" fill="#00000"/>
+            </svg>
+            <span class="app-name">Portfolio de Aymane</span>
+        </div>
+        <nav class="sys-nav">
+            <a href="index.html" class="nav-item disabled">Accueil</a>
+            <a href="projets.html" class="nav-item active">Projets</a>
+            <a href="contact.html" class="nav-item disabled">Contact</a>
+        </nav>
+        <div class="sys-right">
+            <span id="clock">00:00</span>
+        </div>
+    </header>
+
+<main class="spatial-container">
+    
+        <button class="nav-arrow arrow-left" id="deck-prev" aria-label="Projet précédent">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+        </button>
+        
+        <button class="nav-arrow arrow-right" id="deck-next" aria-label="Projet suivant">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+        </button>
+
+        <div class="spatial-deck" id="main-deck">
+            
+            <div class="deck-slot active" data-index="0">
+                <div class="project-intro left-intro">
+        <h3>Découvrir mes projets</h3>
+        <p>Cet espace rassemble mes réalisations en développement logiciel, architecture de données et design d'interface. Explorez chaque application pour analyser mon approche technique.</p>
+    </div>
+                <article class="project-card tilt-card">
+                    <div class="iphone-btn vol-up"></div>
+                    <div class="iphone-btn vol-down"></div>
+                    <div class="iphone-btn power"></div>
+                    
+                    <div class="card-inner">
+                        <div class="card-shine"></div>
+                        <div class="dynamic-island"></div>
+                        
+                        <div class="project-image-wrapper layer" style="--depth: 25px;">
+                            <img src="capturechatbot2.png" alt="Smart ChatBot Engine" class="project-image">
+                        </div>
+                        
+                        <div class="project-info-wrapper layer" style="--depth: 15px;">
+                            <div class="project-meta">
+                                <span class="app-badge">AI & POO</span>
+                            </div>
+                            <h2>Chatbot Web Intégré et Interface de Dialogue</h2>
+                            <p class="project-desc">
+                                Agent conversationnel autonome fondé sur la POO, doté d'une indexation textuelle optimisée et d'un thésaurus conceptuel.
+                            </p>
+                            <a href="#" class="project-link">
+                                <span>Consulter le projet</span>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                            </a>
+                        </div>
+
+                        <div class="project-details-app">
+                            <div class="details-header">
+                                <button class="details-back-btn">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                                    <span>Retour</span>
+                                </button>
+                                <span class="details-header-title">Détails</span>
+                            </div>
+                            <div class="details-scroll-content">
+                                <h1 class="details-title">Chatbot Web Intégré et Interface de Dialogue</h1>
+                                <p class="details-full-desc">Agent conversationnel autonome fondé sur la programmation orientée objet, conçu pour l'indexation textuelle et l'exploration de graphes sémantiques.</p>
+                                
+                                <div class="details-section">
+                                    <h3>Objectifs</h3>
+                                    <p>Concevoir une architecture logicielle modulaire et robuste capable de traiter le langage naturel, d'associer des requêtes utilisateurs à un thésaurus conceptuel et de générer des réponses contextualisées de manière autonome.</p>
+                                </div>
+
+                                <div class="details-section">
+                                    <h3>Compétences</h3>
+                                    <div class="details-tags">
+                                        <span class="detail-tag">Java</span>
+                                        <span class="detail-tag">HTML</span>
+                                        <span class="detail-tag">CSS</span>
+                                        <span class="detail-tag">UML</span>
+                                    </div>
+                                </div>
+
+                                <div class="details-section">
+                                    <h3>Travail en groupe</h3>
+                                    <p>Développement collaboratif de la structure globale de l'application. Planification des diagrammes de classes UML et gestion du versioning via Git pour harmoniser l'intégration du moteur et de l'interface.</p>
+                                </div>
+
+                                <div class="details-section">
+                                    <h3>Travail individuel</h3>
+                                    <p>Conception et optimisation de l'algorithme d'indexation textuelle inversée. Implémentation du système de recherche multicritère et création de la structure de données du dictionnaire de concepts.</p>
+                                </div>
+
+                                <div class="details-section">
+                                    <h3>Techniques & Savoir-faire</h3>
+                                    <p>Maîtrise des principes de la POO (encapsulation, polymorphisme, héritage), manipulation de structures de données complexes, et création d'interfaces utilisateur graphiques fluides en HTML et en CSS.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </article>
+            </div>
+
+            <div class="deck-slot right" data-index="1">
+                <article class="project-card tilt-card">
+                    <div class="iphone-btn vol-up"></div>
+                    <div class="iphone-btn vol-down"></div>
+                    <div class="iphone-btn power"></div>
+                    
+                    <div class="card-inner">
+                        <div class="card-shine"></div>
+                        <div class="dynamic-island"></div>
+                        
+                        <div class="project-image-wrapper layer" style="--depth: 25px;">
+                            <img src="CaptureIcoop3.png" alt="Analyse de Données & SGBD" class="project-image">
+                        </div>
+                        
+                        <div class="project-info-wrapper layer" style="--depth: 15px;">
+                            <div class="project-meta">
+                                <span class="app-badge">Java & POO</span>
+                            </div>
+                            <h2>ICoop : Moteur & Jeu 2D</h2>
+                            <p class="project-desc">
+                                Développement en Java pur d'un moteur de jeu bidimensionnel sur grille et conception d'un gameplay coopératif synchrone à deux personnages.
+                            </p>
+                            <a href="#" class="project-link">
+                                <span>Consulter le projet</span>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                            </a>
+                        </div>
+
+                        <div class="project-details-app">
+                            <div class="details-header">
+                                <button class="details-back-btn">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                                    <span>Retour</span>
+                                </button>
+                                <span class="details-header-title">Détails</span>
+                            </div>
+                            <div class="details-scroll-content">
+                                <h1 class="details-title">ICoop — Moteur de Jeu 2D</h1>
+                                <p class="details-full-desc">Architecture logicielle ad-hoc et développement d'une variante de jeu de rôle tactique sur grille, axée sur la synergie de deux héros complémentaires.</p>
+                                
+                                <div class="details-section">
+                                    <h3>Objectifs</h3>
+                                    <p>Créer un moteur de jeu bidimensionnel robuste et implémenter une déclinaison inspirée des mécaniques coopératives de type <i>Fireboy & Watergirl</i>. L'enjeu principal consistait à structurer une application modulaire à travers quatre jalons évolutifs majeurs, forçant les deux protagonistes à collaborer pour débloquer des zones, interagir avec l'environnement et atteindre la sortie.</p>
+                                </div>
+
+                                <div class="details-section">
+                                    <h3>Compétences</h3>
+                                    <div class="details-tags">
+                    <span class="detail-tag">Java Pur</span>
+                    <span class="detail-tag">POO Avancée</span>
+                    <span class="detail-tag">Conception Logicielle</span>
+                    <span class="detail-tag">Architecture 2D</span>
+                                    </div>
+                                </div>
+
+                                <div class="details-section">
+                                    <h3>Travail en groupe</h3>
+                                    <p>Projet mené en binôme. Collaboration étroite sur la définition de la logique de coopération, la conception des énigmes du niveau, la synchronisation des actions des deux héros et la validation rigoureuse des quatre étapes fondamentales du cahier des charges.</p>
+                                </div>
+
+                                <div class="details-section">
+                                    <h3>Travail individuel</h3>
+                                    <p>Modélisation et implémentation du cycle d'interaction sur la matrice (gestion fine des collisions, états des tuiles, déclencheurs). Optimisation des niveaux d'abstraction logicielle pour rendre le moteur de jeu flexible, permettant d'ajouter facilement de nouvelles variantes ou entités dynamiques.</p>
+                                </div>
+
+                                <div class="details-section">
+                                    <h3>Techniques & Savoir-faire</h3>
+                                    <p>Mise en pratique rigoureuse des concepts cardinaux de la programmation orientée objet (polymorphisme, héritage et encapsulation). Conception d'un code hautement extensible et évolutif, garantissant l'adaptation fluide du programme à divers contextes ludiques et graphiques.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </article>
+            </div>
+
+            <div class="deck-slot far-right" data-index="2">
+    <div class="project-intro right-intro">
+        <h3>Vers de nouveaux défis</h3>
+        <p>De la théorie algorithmique à la conception d'expériences web interactives, je cherche continuellement à perfectionner mon savoir-faire.</p>
+    </div>
+    <!-- Ajout de la classe 'project-waiting' pour le ciblage CSS -->
+    <article class="project-card tilt-card project-waiting">
+        <div class="iphone-btn vol-up"></div>
+        <div class="iphone-btn vol-down"></div>
+        <div class="iphone-btn power"></div>
+        
+        <div class="card-inner">
+            <div class="card-shine"></div>
+            <div class="dynamic-island"></div>
+            
+     
+<div class="project-image-wrapper layer" style="--depth: 25px; display: flex; justify-content: center; align-items: center; height: 160px; background: transparent; margin-top: 38px;">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#8e8e93" stroke-width="1.5" style="width: 32px; height: 32px; opacity: 0.5;">
+                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                    <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                </svg>
+            </div>
+            
+            <div class="project-info-wrapper layer" style="--depth: 15px;">
+                <div class="project-meta">
+ 
+                    <span class="app-badge" style="background: rgba(142, 142, 147, 0.15); color: #8e8e93;">En attente</span>
+                </div>
+                <h2 style="color: #8e8e93;">Prochainement</h2>
+                <p class="project-desc" style="color: #86868b;">
+                    Un nouveau projet technique et passionnant est en cours de réflexion. 
+                </p>
+                <a href="#" class="project-link" style="background: linear-gradient(180deg, #aeaeaf 0%, #8e8e93 100%); box-shadow: none; border-color: rgba(0,0,0,0.15); pointer-events: none; cursor: not-allowed; opacity: 0.7;">
+                    <span>Bientôt disponible</span>
+                </a>
+            </div>
+
+            <div class="project-details-app">
+                <div class="details-header">
+                    <button class="details-back-btn">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                        <span>Retour</span>
+                    </button>
+                    <span class="details-header-title">Détails</span>
+                </div>
+                <div class="details-scroll-content" style="display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; height: 100%;">
+                    <h1 class="details-title" style="color: #8e8e93; padding: 0;">Laboratoire en développement</h1>
+                    <p class="details-full-desc" style="padding: 0; max-width: 80%;">Les spécifications techniques et l'architecture de cette application seront dévoilées très prochainement.</p>
+                </div>
+            </div>
+
+        </div>
+    </article>
+</div>
+
+        </div>
+    </main>
+
+    <script src="scriptprojets.js"></script>
+    <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+    <defs>
+        <filter id="liquid-wave" x="-30%" y="-30%" width="160%" height="160%">
+            <feTurbulence type="fractalNoise" baseFrequency="0.008" numOctaves="2" result="noise" />
+            <feDisplacementMap in="SourceGraphic" in2="noise" scale="0" xChannelSelector="R" yChannelSelector="G" id="wave-displacement" />
+        </filter>
+    </defs>
+</svg>
+</body>
+</html>

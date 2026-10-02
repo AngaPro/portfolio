@@ -256,9 +256,20 @@ body, html {
 .avatar-glow {
     width: 120px;
     height: 120px;
-    border-radius: 50%;       
-    object-fit: cover;        
-    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    border-radius: 50%;
+    object-fit: cover;
+
+
+    border: 4px solid #ffffff;
+
+
+    box-shadow: 
+
+        inset 0 0 0 2px rgba(0, 0, 0, 0.25), 
+
+        0 8px 20px rgba(0, 0, 0, 0.12);
+
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .platinum-text {
@@ -1776,3 +1787,707 @@ input:checked + .slider:before {
     }
 }
 
+
+
+
+#codeWindow .window-inner {
+    height: 650px;
+    min-height: 0;
+    background: rgba(255, 255, 255, 0.82);
+    backdrop-filter: blur(40px);
+    -webkit-backdrop-filter: blur(40px);
+}
+
+
+.code-app-viewport {
+    display: flex;
+    flex: 1;
+    min-height: 0;
+    background: #1e1e1e;
+    color: #d4d4d4;
+    overflow: hidden;
+}
+
+.code-sidebar {
+    width: 225px;
+    flex: 0 0 225px;
+    background: #181818;
+    border-right: 1px solid #2d2d2d;
+    padding: 15px 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    user-select: none;
+}
+
+.code-project-title {
+    height: 30px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 8px;
+    margin-bottom: 10px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.7px;
+    color: #c8c8c8;
+}
+
+.code-project-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #22c55e;
+    box-shadow: 0 0 10px rgba(34,197,94,.5);
+}
+
+.code-sidebar-label {
+    padding: 0 8px 7px;
+    font-size: 10px;
+    letter-spacing: .75px;
+    color: #777;
+}
+
+.code-file {
+    appearance: none;
+    border: 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    border-radius: 6px;
+    padding: 8px 10px;
+    background: transparent;
+    color: #bdbdbd;
+    text-align: left;
+    font: inherit;
+    font-size: 12px;
+    cursor: pointer;
+    transition: background .16s ease, color .16s ease;
+}
+
+.code-file:hover {
+    background: #232323;
+    color: #e5e5e5;
+}
+
+.code-file.active {
+    background: #2b2b2b;
+    color: #fff;
+}
+
+.code-file-icon {
+    width: 22px;
+    flex: 0 0 22px;
+    text-align: center;
+    font-size: 9px;
+    font-weight: 800;
+    line-height: 18px;
+    border-radius: 4px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+.code-file-icon.html { color: #ff7043; }
+.code-file-icon.js { color: #f7df1e; font-size: 8px; }
+.code-file-icon.css { color: #42a5f5; }
+
+.code-editor-shell {
+    min-width: 0;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background: #1e1e1e;
+}
+
+.code-tabbar {
+    height: 42px;
+    flex: 0 0 42px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #181818;
+    border-bottom: 1px solid #2d2d2d;
+}
+
+.code-open-tab {
+    min-width: 170px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 13px;
+    background: #1e1e1e;
+    border-right: 1px solid #2d2d2d;
+    border-top: 1px solid #3a3a3a;
+    color: #ddd;
+    font-size: 11px;
+}
+
+.code-open-tab.active {
+    box-shadow: inset 0 2px 0 #007acc;
+}
+
+.code-tab-close {
+    margin-left: auto;
+    font-size: 15px;
+    color: #777;
+}
+
+.code-editor-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding-right: 10px;
+    color: #777;
+    font-size: 10px;
+}
+
+.code-status-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #22c55e;
+    box-shadow: 0 0 7px rgba(34,197,94,.35);
+}
+
+.code-run-btn,
+#code-clear-console {
+    border: 1px solid #3a3a3a;
+    background: #262626;
+    color: #cfcfcf;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background .16s ease, border-color .16s ease;
+}
+
+.code-run-btn {
+    padding: 6px 10px;
+    font-size: 10px;
+}
+
+.code-run-btn:hover,
+#code-clear-console:hover {
+    background: #303030;
+    border-color: #505050;
+}
+
+.code-workspace {
+    min-height: 0;
+    flex: 1;
+    display: grid;
+    grid-template-columns: minmax(0, 1.25fr) minmax(300px, .75fr);
+}
+
+.code-editor-panel,
+.code-preview-panel {
+    min-width: 0;
+    min-height: 0;
+}
+
+.code-editor-panel {
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid #2d2d2d;
+}
+
+.code-breadcrumb {
+    height: 32px;
+    flex: 0 0 32px;
+    display: flex;
+    align-items: center;
+    padding: 0 14px;
+    border-bottom: 1px solid #2a2a2a;
+    color: #666;
+    background: #1d1d1d;
+    font-size: 10px;
+}
+
+.code-breadcrumb strong {
+    color: #aaa;
+    font-weight: 500;
+}
+
+.code-editor {
+    min-height: 0;
+    flex: 1;
+    display: grid;
+    grid-template-columns: 46px minmax(0, 1fr);
+    overflow: hidden;
+}
+
+.code-line-numbers {
+    padding: 12px 9px 12px 0;
+    background: #1e1e1e;
+    color: #555;
+    text-align: right;
+    font: 12px/1.55 ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    overflow: hidden;
+    white-space: pre;
+    user-select: none;
+}
+
+#code-textarea {
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+    resize: none;
+    border: 0;
+    outline: none;
+    padding: 12px 14px;
+    background: #1e1e1e;
+    color: #d4d4d4;
+    caret-color: #fff;
+    font: 12px/1.55 ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    tab-size: 2;
+    white-space: pre;
+    overflow: auto;
+    user-select: text !important;
+}
+
+#code-textarea::selection {
+    background: rgba(38, 79, 120, .8);
+}
+
+#code-textarea::-webkit-scrollbar,
+#code-preview::-webkit-scrollbar,
+#code-console-output::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+#code-textarea::-webkit-scrollbar-thumb,
+#code-preview::-webkit-scrollbar,
+#code-console-output::-webkit-scrollbar-thumb {
+    background: #3a3a3a;
+    border-radius: 6px;
+}
+
+.code-preview-panel {
+    display: flex;
+    flex-direction: column;
+    background: linear-gradient(145deg, rgba(245,245,247,.96), rgba(229,229,231,.94));
+}
+
+.code-preview-header {
+    height: 32px;
+    flex: 0 0 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 11px;
+    border-bottom: 1px solid rgba(0,0,0,.08);
+    background: rgba(255,255,255,.62);
+    backdrop-filter: blur(14px);
+    color: #86868b;
+    font-size: 9px;
+    letter-spacing: .65px;
+    font-weight: 700;
+}
+
+#code-preview {
+    flex: 1;
+    min-height: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    border: 0;
+    background: linear-gradient(135deg, #f5f5f7 0%, #e5e5e7 58%, #dbe9f8 100%);
+    overflow: hidden !important;
+    scrollbar-width: none;
+}
+
+#code-preview::-webkit-scrollbar {
+    display: none;
+}
+
+.code-console {
+    height: 145px;
+    flex: 0 0 145px;
+    border-top: 1px solid rgba(0,0,0,.08);
+    background: rgba(245,245,247,.78);
+    color: #424245;
+    display: flex;
+    flex-direction: column;
+}
+
+.code-console-title {
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 9px;
+    border-bottom: 1px solid rgba(0,0,0,.06);
+    color: #86868b;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: .6px;
+}
+
+#code-clear-console {
+    padding: 3px 7px;
+    font-size: 9px;
+}
+
+#code-console-output {
+    flex: 1;
+    min-height: 0;
+    margin: 0;
+    padding: 8px 10px;
+    overflow: auto;
+    font: 11px/1.45 ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    white-space: pre-wrap;
+}
+
+
+@media (max-width: 900px) {
+    #codeWindow {
+        width: 96% !important;
+    }
+
+    .code-workspace {
+        grid-template-columns: 1fr;
+        grid-template-rows: minmax(290px, 1fr) 265px;
+    }
+
+    .code-editor-panel {
+        border-right: 0;
+        border-bottom: 1px solid #2d2d2d;
+    }
+
+    .code-sidebar {
+        width: 180px;
+        flex-basis: 180px;
+    }
+}
+
+@media (max-width: 768px) {
+    #codeWindow .window-inner {
+        height: 80vh !important;
+    }
+
+    #codeWindow .code-app-viewport {
+        flex-direction: column;
+    }
+
+    #codeWindow .code-sidebar {
+        width: 100%;
+        flex-basis: auto;
+        max-height: 105px;
+        flex-direction: row;
+        align-items: center;
+        flex-wrap: wrap;
+        padding: 7px;
+        border-right: 0;
+        border-bottom: 1px solid #2d2d2d;
+    }
+
+    #codeWindow .code-project-title {
+        margin: 0 7px 0 3px;
+    }
+
+    #codeWindow .code-sidebar-label {
+        display: none;
+    }
+
+    #codeWindow .code-file {
+        width: auto;
+        flex: 1 1 120px;
+        max-width: 170px;
+    }
+}
+
+
+
+.desktop-pdf-item {
+    cursor: pointer;
+    outline: none;
+}
+
+.desktop-pdf-item:focus-visible {
+    background: rgba(255, 255, 255, 0.28);
+    box-shadow: 0 0 0 2px rgba(0, 122, 255, 0.28);
+}
+
+.desktop-pdf-item:active {
+    transform: scale(0.97);
+}
+
+.pdf-viewer-window {
+    width: 820px !important;
+    min-width: 820px;
+}
+
+.pdf-title-bar {
+    position: relative;
+}
+
+.pdf-toolbar {
+    min-height: 54px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 7px 14px;
+    background: linear-gradient(180deg, rgba(250,250,250,.98), rgba(238,238,241,.96));
+    border-bottom: 1px solid rgba(0,0,0,.10);
+}
+
+.pdf-document-meta {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 0;
+}
+
+.pdf-document-meta > div:last-child {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+.pdf-document-meta strong {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 12px;
+    color: #1d1d1f;
+}
+
+.pdf-document-meta span {
+    margin-top: 2px;
+    color: #86868b;
+    font-size: 10px;
+}
+
+.pdf-mini-icon {
+    flex: 0 0 auto;
+    width: 31px;
+    height: 36px;
+    display: grid;
+    place-items: center;
+    border-radius: 6px;
+    background: #fff;
+    border: 1px solid rgba(0,0,0,.10);
+    box-shadow: 0 3px 9px rgba(0,0,0,.07);
+    color: #ff3b30;
+    font-size: 8px;
+    font-weight: 800;
+}
+
+.pdf-toolbar-actions {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex: 0 0 auto;
+}
+
+.pdf-tool {
+    width: 30px;
+    height: 30px;
+    border: 1px solid rgba(0,0,0,.10);
+    border-radius: 8px;
+    background: rgba(255,255,255,.82);
+    color: #4d4d50;
+    cursor: pointer;
+    font-size: 16px;
+    line-height: 1;
+    transition: transform .15s ease, background .15s ease, box-shadow .15s ease;
+}
+
+.pdf-tool:hover {
+    background: #fff;
+    box-shadow: 0 5px 13px rgba(0,0,0,.08);
+}
+
+.pdf-tool:active {
+    transform: scale(.94);
+}
+
+.pdf-document-stage {
+    position: relative;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    min-height: 0;
+    overflow: hidden;
+    padding: 0;
+    background: #ffffff; 
+}
+
+.pdf-document-stage::-webkit-scrollbar {
+    width: 9px;
+}
+
+.pdf-document-stage::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.pdf-document-stage::-webkit-scrollbar-thumb {
+    background: rgba(0,0,0,.18);
+    border-radius: 999px;
+    border: 2px solid transparent;
+    background-clip: padding-box;
+}
+
+.pdf-native-shell {
+    width: 100%;
+    height: 100%;
+    flex: 1;
+    margin: 0;
+    background: #ffffff;
+    border-radius: 0;
+    overflow: hidden;
+    border: 0;
+    box-shadow: none;
+}
+
+#pdfNativeFrame {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    background: #ffffff;
+}
+
+.pdf-download-tool {
+    display: inline-grid;
+    place-items: center;
+    text-decoration: none;
+    color: #4d4d50;
+}
+
+.pdf-download-tool:hover {
+    color: #1d1d1f;
+}
+
+.pdf-viewer-message {
+    position: absolute;
+    inset: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 6px;
+    border-radius: 14px;
+    background: rgba(255,255,255,.94);
+    border: 1px solid rgba(0,0,0,.07);
+    box-shadow: 0 10px 30px rgba(0,0,0,.06);
+    color: #6e6e73;
+    text-align: center;
+    font-size: 12px;
+    backdrop-filter: blur(10px);
+}
+
+.pdf-viewer-message strong {
+    color: #1d1d1f;
+}
+
+.pdf-status-bar {
+    height: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 0 10px;
+    border-top: 1px solid rgba(0,0,0,.08);
+    background: rgba(246,246,248,.96);
+    color: #8a8a8f;
+    font-size: 9px;
+}
+
+.pdf-status-bar span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+@media (max-width: 1050px) {
+    .pdf-viewer-window {
+        width: 92vw !important;
+        min-width: 0;
+        left: 4vw !important;
+    }
+}
+
+@media (max-width: 700px) {
+    .pdf-viewer-window {
+        width: 96vw !important;
+        min-width: 0;
+        left: 2vw !important;
+    }
+
+    #pdfViewerWindow .window-inner {
+        height: 82vh !important;
+    }
+
+    .pdf-toolbar {
+        padding: 7px 10px;
+    }
+
+    .pdf-document-stage {
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+}
+
+
+.pdf-native-shell {
+    overflow: hidden !important;
+    position: relative !important;
+    width: 100% !important;
+    height: 100% !important; 
+}
+
+#pdfNativeFrame {
+    position: absolute !important;
+    transform: none !important;
+
+
+    top: -15px !important;
+
+
+    left: -15px !important;
+
+
+    width: calc(100% + 40px) !important;
+
+
+    height: calc(100% + 30px) !important;
+
+    border: none !important;
+    outline: none !important;
+    
+}
+
+
+.avatar-glow {
+    width: 130px !important;
+    height: 130px !important;
+    
+    
+}
+
+
+.platinum-text {
+    font-size: 52px !important;
+}
+
+
+.tagline {
+    font-size: 20px !important;
+}
+
+
+.hero {
+    margin-bottom: 20px !important;
+}
+
+.avatar-glow {
+    width: 130px !important;
+    height: 130px !important;
+    border-radius: 50% !important;
+    border: 4px solid #ffffff !important;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12) !important;
+    outline: 1px solid rgba(0, 0, 0, 0.08) !important;
+}

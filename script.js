@@ -96,9 +96,12 @@ animateLiquid();
             targetWindow.style.transform = "scale(1.015)";
             
             
-            document.getElementById('draggableWindow').style.zIndex = "100";
+            const pw = document.getElementById('draggableWindow');
             const sw = document.getElementById('settingsWindow');
-            if (sw) sw.style.zIndex = "100";
+            const cw = document.getElementById('codeWindow');
+            if (pw && targetWindow !== pw) pw.style.zIndex = "100";
+            if (sw && targetWindow !== sw) sw.style.zIndex = "100";
+            if (cw && targetWindow !== cw) cw.style.zIndex = "100";
             targetWindow.style.zIndex = "1000";
         });
 
@@ -142,6 +145,31 @@ animateLiquid();
     
     initWindowDragging('draggableWindow', 'windowHeader');
     initWindowDragging('settingsWindow', 'settingsWindowHeader');
+    initWindowDragging('codeWindow', 'codeWindowHeader');
+    initWindowDragging('pdfViewerWindow', 'pdfViewerWindowHeader');
+
+    // Même comportement de focus pour toutes les fenêtres : un clic n'importe où
+    // dans la fenêtre la ramène au premier plan, exactement comme les autres apps.
+    const managedWindows = ['draggableWindow', 'settingsWindow', 'codeWindow', 'pdfViewerWindow']
+        .map(id => document.getElementById(id))
+        .filter(Boolean);
+    let windowStackCounter = 1000;
+    function focusManagedWindow(target) {
+        if (!target) return;
+        // Le focus doit être immédiat : la fenêtre ciblée passe devant toutes les autres
+        // avant même le démarrage d'une éventuelle animation d'ouverture.
+        windowStackCounter += 1;
+        managedWindows.forEach(win => {
+            if (win !== target && win.style.display !== 'none') {
+                win.style.zIndex = String(Math.max(100, windowStackCounter - 1));
+            }
+        });
+        target.style.zIndex = String(windowStackCounter);
+        target.style.position = 'absolute';
+    }
+    managedWindows.forEach(win => {
+        win.addEventListener('pointerdown', () => focusManagedWindow(win));
+    });
 
     
     const tabs = document.querySelectorAll('.sidebar-nav .nav-tab:not(.locked)');
@@ -402,8 +430,9 @@ animateLiquid();
 
         if (presWin.style.display === 'block') return;
 
-        isAnimatingGenie = true;
         presWin.style.display = 'block';
+        focusManagedWindow(presWin);
+        isAnimatingGenie = true;
 
         if (presentationStateSaved) {
             presWin.style.left = presentationStateSaved.left;
@@ -491,11 +520,9 @@ animateLiquid();
             return;
         }
 
-        isAnimatingGenie = true;
         settingsWin.style.display = 'block';
-
-        document.getElementById('settingsWindow').style.zIndex = "1000";
-        document.getElementById('draggableWindow').style.zIndex = "100";
+        focusManagedWindow(settingsWin);
+        isAnimatingGenie = true;
 
         if (settingsStateSaved) {
             settingsWin.style.left = settingsStateSaved.left;
@@ -532,6 +559,448 @@ animateLiquid();
     }
 
     
+
+
+    // =====================================================
+    // Code.app — faux VS Code interactif
+    // =====================================================
+    const codeWin = document.getElementById('codeWindow');
+    const codeDockApp = document.getElementById('codeDockApp');
+    const codeRedBtn = codeWin ? codeWin.querySelector('.light.red') : null;
+    const codeYellowBtn = codeWin ? codeWin.querySelector('.light.yellow') : null;
+    const codeTextarea = document.getElementById('code-textarea');
+    const codeLineNumbers = document.getElementById('code-line-numbers');
+    const codePreview = document.getElementById('code-preview');
+    const codeConsole = document.getElementById('code-console-output');
+    const codeTabTitle = document.getElementById('code-tab-title');
+    const codeBreadcrumb = document.getElementById('code-breadcrumb-name');
+    const codePreviewStatus = document.getElementById('code-preview-status');
+    const codeRunBtn = document.getElementById('code-run-btn');
+    const codeClearConsole = document.getElementById('code-clear-console');
+    const codeFileButtons = document.querySelectorAll('.code-file');
+    const codeOpenTabIcon = document.querySelector('.code-open-tab .code-file-icon');
+
+    let codeStateSaved = null;
+    let activeCodeFile = 'index.html';
+    const codeFiles = {
+        'index.html': `<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mon projet</title>
+</head>
+<body>
+  <main class="demo">
+    <span class="eyebrow">Code.app</span>
+    <h1>Bonjour</h1>
+    <p>Écris ton HTML, CSS et JavaScript puis clique sur « Exécuter ».</p>
+    <button onclick="saluer()">Tester le JavaScript</button>
+  </main>
+</body>
+</html>`,
+        'script.js': `function saluer() {
+  console.log('JavaScript exécuté avec succès ✨');
+  const title = document.querySelector('h1');
+  if (title) title.textContent = 'Ça fonctionne !';
+}`,
+        'style.css': `.demo {
+  font-family: Inter, system-ui, sans-serif;
+  width: min(500px, 100%);
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 24px 26px;
+  border-radius: 24px;
+  background: linear-gradient(135deg, rgba(255,255,255,.92), rgba(229,233,239,.94));
+  border: 1px solid rgba(0,0,0,.06);
+  box-shadow: 0 20px 50px rgba(0,0,0,.07);
+}
+.eyebrow {
+  color: #5f6875;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+h1 {
+  margin: 8px 0 7px;
+  font-size: 34px;
+  line-height: 1.05;
+}
+p {
+  max-width: 420px;
+  margin: 0 auto 16px;
+  line-height: 1.45;
+}
+button {
+  border: 0;
+  border-radius: 12px;
+  padding: 10px 14px;
+  background: linear-gradient(180deg, #6f7680, #5d646e);
+  color: white;
+  cursor: pointer;
+  box-shadow: 0 8px 18px rgba(50,55,60,.16);
+}`
+    };
+
+    function syncCodeLineNumbers() {
+        if (!codeTextarea || !codeLineNumbers) return;
+        const count = Math.max(1, codeTextarea.value.split('\n').length);
+        codeLineNumbers.textContent = Array.from({length: count}, (_, i) => String(i + 1)).join('\n');
+    }
+
+    function syncCodeEditorScroll() {
+        if (!codeTextarea || !codeLineNumbers) return;
+        codeLineNumbers.scrollTop = codeTextarea.scrollTop;
+    }
+
+    function updateCodeTabVisuals() {
+        const button = document.querySelector(`.code-file[data-file="${activeCodeFile}"]`);
+        codeFileButtons.forEach(btn => btn.classList.toggle('active', btn === button));
+
+        const iconMap = {
+            'index.html': { cls: 'html', text: '</>' },
+            'script.js': { cls: 'js', text: 'JS' },
+            'style.css': { cls: 'css', text: '#' }
+        };
+        const icon = iconMap[activeCodeFile];
+        if (codeOpenTabIcon && icon) {
+            codeOpenTabIcon.className = `code-file-icon ${icon.cls}`;
+            codeOpenTabIcon.textContent = icon.text;
+        }
+        if (codeTabTitle) codeTabTitle.textContent = activeCodeFile;
+        if (codeBreadcrumb) codeBreadcrumb.textContent = activeCodeFile;
+        if (codePreviewStatus) codePreviewStatus.textContent = activeCodeFile;
+    }
+
+    function loadCodeFile(fileName) {
+        if (!codeTextarea || !codeFiles[fileName]) return;
+        codeFiles[activeCodeFile] = codeTextarea.value;
+        activeCodeFile = fileName;
+        codeTextarea.value = codeFiles[activeCodeFile];
+        updateCodeTabVisuals();
+        syncCodeLineNumbers();
+        codeTextarea.focus();
+        codeTextarea.setSelectionRange(codeTextarea.value.length, codeTextarea.value.length);
+    }
+
+    function writeCodeConsole(message, type = 'log') {
+        if (!codeConsole) return;
+        const prefix = type === 'error' ? '✕ ' : '› ';
+        const line = `${prefix}${message}`;
+        codeConsole.textContent = codeConsole.textContent === 'Prêt à exécuter.'
+            ? line
+            : `${codeConsole.textContent}\n${line}`;
+    }
+
+    function renderCodePreview() {
+        if (!codePreview) return;
+
+        codeFiles[activeCodeFile] = codeTextarea ? codeTextarea.value : codeFiles[activeCodeFile];
+
+        const html = codeFiles['index.html'];
+        const cssText = codeFiles['style.css'];
+        const jsText = codeFiles['script.js'];
+
+        const previewChrome = `
+<style id="portfolio-preview-chrome">
+  :root { color-scheme: light; }
+  html, body {
+    width: 100% !important;
+    height: 100% !important;
+    min-height: 100% !important;
+    margin: 0 !important;
+    overflow: hidden !important;
+    background: radial-gradient(circle at 50% 0%, rgba(255,255,255,.92) 0%, rgba(245,245,247,.96) 42%, rgba(225,232,241,.98) 100%) !important;
+    color: #1d1d1f !important;
+  }
+  body {
+    box-sizing: border-box !important;
+    min-height: 100% !important;
+    display: flex !important;
+    align-items: flex-start !important;
+    justify-content: center !important;
+    padding: 18px 18px 12px !important;
+    font-family: Inter, -apple-system, BlinkMacSystemFont, "SF Pro Display", system-ui, sans-serif !important;
+    text-align: center !important;
+  }
+  main, section, article { max-width: 100% !important; }
+  *, *::before, *::after { box-sizing: border-box; }
+  .demo {
+    width: min(500px, 100%) !important;
+    max-width: 500px !important;
+    margin: 0 auto !important;
+    padding: 24px 26px !important;
+    border-radius: 22px !important;
+    background: linear-gradient(145deg, rgba(255,255,255,.88), rgba(231,235,241,.90)) !important;
+    border: 1px solid rgba(0,0,0,.07) !important;
+    box-shadow: 0 16px 38px rgba(0,0,0,.07), inset 0 1px 0 rgba(255,255,255,.75) !important;
+  }
+  .demo h1 { margin: 8px 0 7px !important; font-size: 34px !important; line-height: 1.05 !important; }
+  .demo p { margin: 0 auto 16px !important; max-width: 420px !important; font-size: 13px !important; line-height: 1.45 !important; }
+  .demo button { margin-top: 4px !important; }
+  button { background: linear-gradient(180deg, #6f7680, #5d646e) !important; color: #fff !important; box-shadow: 0 8px 18px rgba(50,55,60,.16) !important; }
+</style>`;
+
+        const bridgeScript = `
+<script>
+(() => {
+  const originalLog = console.log;
+  const originalError = console.error;
+  function forward(type, args) {
+    parent.postMessage({
+      source: 'code-preview',
+      type,
+      message: args.map(value => {
+        try { return typeof value === 'string' ? value : JSON.stringify(value); }
+        catch { return String(value); }
+      }).join(' ')
+    }, '*');
+  }
+  console.log = (...args) => { originalLog(...args); forward('log', args); };
+  console.error = (...args) => { originalError(...args); forward('error', args); };
+})();
+</script>`;
+
+        const hasStyleTag = /<head[\s\S]*?<\/head>/i.test(html);
+        const composedHtml = html
+            .replace(/<\/head>/i, `<style>${cssText}</style>${previewChrome}${bridgeScript}</head>`)
+            .replace(/<\/body>/i, `<script>${jsText}<\/script></body>`);
+
+        codePreview.srcdoc = composedHtml;
+        if (codeConsole) codeConsole.textContent = 'Aperçu rechargé.';
+    }
+
+    function runActiveCode() {
+        if (!codeTextarea) return;
+        codeFiles[activeCodeFile] = codeTextarea.value;
+
+        if (activeCodeFile === 'style.css') {
+            renderCodePreview();
+            writeCodeConsole('CSS appliqué à l’aperçu.');
+            return;
+        }
+
+        if (activeCodeFile === 'script.js') {
+            renderCodePreview();
+            writeCodeConsole('JavaScript rechargé dans l’aperçu.');
+            return;
+        }
+
+        renderCodePreview();
+    }
+
+    codeFileButtons.forEach(button => {
+        button.addEventListener('click', () => loadCodeFile(button.dataset.file));
+    });
+
+    if (codeTextarea) {
+        codeTextarea.addEventListener('input', syncCodeLineNumbers);
+        codeTextarea.addEventListener('scroll', syncCodeEditorScroll);
+        codeTextarea.addEventListener('keydown', (event) => {
+            if (event.key === 'Tab') {
+                event.preventDefault();
+                const start = codeTextarea.selectionStart;
+                const end = codeTextarea.selectionEnd;
+                codeTextarea.value =
+                    codeTextarea.value.substring(0, start) +
+                    '  ' +
+                    codeTextarea.value.substring(end);
+                codeTextarea.selectionStart = codeTextarea.selectionEnd = start + 2;
+                syncCodeLineNumbers();
+            }
+        });
+    }
+
+    window.addEventListener('message', (event) => {
+        if (!event.data || event.data.source !== 'code-preview') return;
+        writeCodeConsole(event.data.message || '', event.data.type || 'log');
+    });
+
+    if (codeRunBtn) codeRunBtn.addEventListener('click', runActiveCode);
+    if (codeClearConsole) {
+        codeClearConsole.addEventListener('click', () => {
+            if (codeConsole) codeConsole.textContent = 'Console effacée.';
+        });
+    }
+
+    if (codeDockApp) {
+        codeDockApp.addEventListener('click', openCodeWindow);
+    }
+
+    function closeAndAddToDockCode(saveState) {
+        if (!codeWin || !codeDockApp || isAnimatingGenie) return;
+
+        if (saveState) {
+            codeStateSaved = {
+                left: codeWin.style.left,
+                top: codeWin.style.top,
+                activeFile: activeCodeFile
+            };
+        } else {
+            codeStateSaved = null;
+        }
+
+        codeDockApp.style.display = '';
+        codeDockApp.style.transition = 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)';
+        codeDockApp.style.transform = 'scale(0)';
+        codeDockApp.style.opacity = '0';
+
+        isAnimatingGenie = true;
+        const winRect = codeWin.getBoundingClientRect();
+        const dockRect = codeDockApp.getBoundingClientRect();
+
+        runGenieAnimation(codeWin, true, winRect, dockRect, () => {
+            codeDockApp.style.transform = 'scale(1)';
+            codeDockApp.style.opacity = '1';
+            if (codeStateSaved && codeStateSaved.activeFile) {
+                activeCodeFile = codeStateSaved.activeFile;
+            }
+        });
+    }
+
+    function openCodeWindow() {
+        if (!codeWin || !codeDockApp || isAnimatingGenie) return;
+
+        if (codeWin.style.display === 'block') {
+            focusManagedWindow(codeWin);
+            return;
+        }
+
+        // Affichage + focus dans la même frame : Code est immédiatement au premier plan.
+        codeWin.style.display = 'block';
+        focusManagedWindow(codeWin);
+        isAnimatingGenie = true;
+
+        if (codeStateSaved) {
+            codeWin.style.left = codeStateSaved.left;
+            codeWin.style.top = codeStateSaved.top;
+            if (codeStateSaved.activeFile) loadCodeFile(codeStateSaved.activeFile);
+        } else {
+            centerWindow(codeWin);
+            loadCodeFile('index.html');
+        }
+
+        const newWinRect = codeWin.getBoundingClientRect();
+        const currentDockRect = codeDockApp.getBoundingClientRect();
+
+        codeDockApp.style.transition = 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)';
+        codeDockApp.style.transform = 'scale(0)';
+        codeDockApp.style.opacity = '0';
+        setTimeout(() => {
+            if (codeWin.style.display === 'block') codeDockApp.style.display = 'none';
+        }, 300);
+
+        runGenieAnimation(codeWin, false, newWinRect, currentDockRect, null);
+    }
+
+    if (codeRedBtn) {
+        codeRedBtn.style.cursor = 'pointer';
+        codeRedBtn.addEventListener('click', () => closeAndAddToDockCode(false));
+    }
+
+    if (codeYellowBtn) {
+        codeYellowBtn.style.cursor = 'pointer';
+        codeYellowBtn.addEventListener('click', () => closeAndAddToDockCode(true));
+    }
+
+    if (codeTextarea) {
+        codeTextarea.value = codeFiles['index.html'];
+        syncCodeLineNumbers();
+        updateCodeTabVisuals();
+        renderCodePreview();
+    }
+
+
+    // =====================================================
+    // Faux lecteur PDF — lecteur local
+    // =====================================================
+    const cvDesktopFile = document.getElementById('cvDesktopFile');
+    const pdfViewerWindow = document.getElementById('pdfViewerWindow');
+    const pdfStatusText = document.getElementById('pdfStatusText');
+    const pdfRedBtn = document.getElementById('pdfRedBtn');
+    const pdfYellowBtn = document.getElementById('pdfYellowBtn');
+    const pdfOpenNativeBtn = document.getElementById('pdfOpenNativeBtn');
+    const pdfNativeFrame = document.getElementById('pdfNativeFrame');
+    const pdfViewerMessage = document.getElementById('pdfViewerMessage');
+    const pdfViewerMessageTitle = document.getElementById('pdfViewerMessageTitle');
+    const pdfViewerMessageText = document.getElementById('pdfViewerMessageText');
+
+    const PDF_FILE_URL = 'CV_ANGA_AYMANE.pdf';
+
+    function setPdfStatus(message) {
+        if (pdfStatusText) pdfStatusText.textContent = message;
+    }
+
+    function showPdfMessage(title, text) {
+        if (!pdfViewerMessage) return;
+        if (pdfViewerMessageTitle) pdfViewerMessageTitle.textContent = title;
+        if (pdfViewerMessageText) pdfViewerMessageText.textContent = text || '';
+        pdfViewerMessage.style.display = 'flex';
+    }
+
+    function hidePdfMessage() {
+        if (pdfViewerMessage) pdfViewerMessage.style.display = 'none';
+    }
+
+    function showPdfViewer() {
+        if (!pdfViewerWindow) return;
+
+        pdfViewerWindow.style.display = 'block';
+        focusManagedWindow(pdfViewerWindow);
+
+        if (!pdfViewerWindow.dataset.hasBeenPositioned) {
+            centerWindow(pdfViewerWindow);
+            pdfViewerWindow.dataset.hasBeenPositioned = 'true';
+        }
+
+        hidePdfMessage();
+        setPdfStatus('Document prêt');
+    }
+
+    function hidePdfViewer() {
+        if (!pdfViewerWindow) return;
+        pdfViewerWindow.style.display = 'none';
+    }
+
+    if (pdfNativeFrame) {
+        pdfNativeFrame.addEventListener('load', () => {
+            hidePdfMessage();
+            setPdfStatus('Document prêt');
+        });
+        pdfNativeFrame.addEventListener('error', () => {
+            showPdfMessage('Aperçu indisponible', 'Le fichier CV_ANGA_AYMANE.pdf doit se trouver dans le même dossier que portfolio.html.');
+            setPdfStatus('Aperçu indisponible');
+        });
+    }
+
+    if (cvDesktopFile) {
+        cvDesktopFile.style.cursor = 'pointer';
+        cvDesktopFile.addEventListener('click', showPdfViewer);
+        cvDesktopFile.addEventListener('keydown', (event) => {
+            if (event.key === 'Enter' || event.key === ' ') {
+                event.preventDefault();
+                showPdfViewer();
+            }
+        });
+    }
+
+    if (pdfRedBtn) {
+        pdfRedBtn.style.cursor = 'pointer';
+        pdfRedBtn.addEventListener('click', hidePdfViewer);
+    }
+
+    if (pdfYellowBtn) {
+        pdfYellowBtn.style.cursor = 'pointer';
+        pdfYellowBtn.addEventListener('click', hidePdfViewer);
+    }
+
+    if (pdfOpenNativeBtn) {
+        pdfOpenNativeBtn.addEventListener('click', () => {
+            window.open(PDF_FILE_URL, '_blank', 'noopener,noreferrer');
+        });
+    }
+
     const colorOptions = document.querySelectorAll('.color-option-item');
     
     colorOptions.forEach(option => {
@@ -579,4 +1048,7 @@ animateLiquid();
             }
         });
     }
+    
+    
 });
+
